@@ -15,7 +15,8 @@ QR_GENERATOR_KEY = settings.QR_GENERATOR_KEY
 EMAIL_HOST_USER = settings.EMAIL_HOST_USER
 
 def generate_qrcode(event_id, participant_id):
-    """Generate a hash signature for the event and participant IDs."""
+    """Generate a QR code as an image."""
+    # Create the data payload
     message = f"{event_id}:{participant_id}"
     signature = hmac.new(QR_GENERATOR_KEY.encode(), message.encode(), hashlib.sha256).hexdigest()
     data = {
@@ -23,19 +24,21 @@ def generate_qrcode(event_id, participant_id):
         "participant_id": participant_id,
         "signature": signature
     }
+    # Create the QR code
     qr = qrcode.QRCode()
-    qr.add_data(data)
+    qr.add_data(json.dumps(data))  # Ensure the data is serialized properly
     qr.make(fit=True)
-    return qr
+    qr.print_ascii()
+    qr_image = qr.make_image(fill_color="black", back_color="white")  # Generate the QR code as an image
+    return qr_image
 
-
-def send_qr_code_email(email, qr):
+def send_qr_code_email(email, qr_image):
     """
     Sends an email with the QR code attached to the participant.
     """
     # Convert the QR code image to bytes
     qr_code_buffer = BytesIO()
-    qr.save(qr_code_buffer, format="PNG")
+    qr_image.save(qr_code_buffer, format="PNG")
     qr_code_buffer.seek(0)
 
     # Email content
