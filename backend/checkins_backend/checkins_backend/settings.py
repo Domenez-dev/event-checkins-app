@@ -30,10 +30,12 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# For dev Only
 DEBUG = os.environ["DEBUG"]
+# CSRF_COOKIE_SECURE = False
+# CSRF_COOKIE_HTTPONLY = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['testserver', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -141,3 +143,15 @@ LOGOUT_REDIRECT_URL = "/auth/login"  # Redirect after logout
 
 # We are using users.User model instead of the default auth.User.
 AUTH_USER_MODEL = 'users.User'
+
+# Email sending Settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'wikayanet@gmail.com'
+# EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+# EMAIL_HOST_USER = '65ee1949a05ac6'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
+QR_GENERATOR_KEY = os.environ["QR_GENERATOR_KEY"]
+
