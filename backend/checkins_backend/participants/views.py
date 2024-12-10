@@ -2,6 +2,11 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from .models import Participant
 from .utils import generate_qrcode, send_qr_code_email
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .authenticate_gmail import GmailService
+import json
+
 
 def create_participant(request, event_id):
     """
@@ -50,3 +55,46 @@ def list_participants(request):
         for participant in participants
     ]
     return JsonResponse({"participants": data}, status=200)
+
+
+@csrf_exempt
+def send_email(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            sender = data.get('sender')
+            to = data.get('to')
+            subject = data.get('subject')
+            message_text = data.get('message')
+            html = data.get('html', None)
+
+            gmail_service = GmailService()
+            result = gmail_service.send_message(
+                sender=sender,
+                to=to,
+                subject=subject,
+                message_text=message_text,
+                html=html
+            )
+
+            if result:
+                return JsonResponse({
+                    'status': 'success',
+                    'message_id': result['id']
+                })
+            else:
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Failed to send email'
+                }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+
+    return JsonResponse({
+        'status': 'error',
+        'message': 'Method not allowed'
+    }, status=405)
