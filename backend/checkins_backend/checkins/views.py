@@ -54,6 +54,12 @@ class ScanQRCodeView(APIView):
             id=participant_id,
             event=event
         )
+        
+        if datetime.now() > event_end_datetime:
+            return Response(
+                {"error": "Event has already ended. Check-in is not allowed."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         # Check if the participant is already checked in
         if participant.check_in_time is not None:

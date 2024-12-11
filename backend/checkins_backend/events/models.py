@@ -4,7 +4,7 @@ from users.models import User
 class Event(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
-    date = models.DateField()
+    end_date = models.DateField()
     location = models.CharField(max_length=255)
     organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="events")
 
