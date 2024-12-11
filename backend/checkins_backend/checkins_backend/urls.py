@@ -22,5 +22,5 @@ urlpatterns = [
     path('authentication/', include('users.urls')),
     path('participants/', include('participants.urls')),
     path('', include('checkins.urls')),
-    path('create-event/', include('events.urls')),
+    path('event/', include('events.urls')),
 ]
