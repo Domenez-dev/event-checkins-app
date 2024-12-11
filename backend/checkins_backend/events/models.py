@@ -9,4 +9,4 @@ class Event(models.Model):
     organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="events")
 
     def __str__(self):
-        return f"{self.name} ({self.date})"
+        return f"{self.name} ({self.end_date})"
