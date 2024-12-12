@@ -32,7 +32,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # For dev Only
-DEBUG = os.environ["DEBUG"]
+DEBUG = os.environ["DEBUG"] == 'TRUE'
 # CSRF_COOKIE_SECURE = False
 # CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_AGE = 3600*24
