@@ -89,6 +89,17 @@ WSGI_APPLICATION = "checkins_backend.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+"""
+    for testing purposes uncomment the sqlite3 database 
+    and comment the postgresql database block
+"""
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
