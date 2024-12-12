@@ -5,29 +5,35 @@ import {
   TextInput,
   Button,
   FlatList,
-  TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native";
 import { useState } from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import styles from "./styles";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 //import the logic of EventForm:
 import { EventFormComponent } from "../components/EventFormComponent";
 import { addEvent } from "./appData";
+import { globalEvent, globalEvents } from "./globalVar";
 
 const EventFormScreen = () => {
+  const { mode } = useLocalSearchParams();
   //These are the main states of the Screen,
   //it should be there, or we'll have some troubles,
   //with alerts, routes and general management.
-  const [event, setEvent] = useState({
-    name: "",
-    description: "",
-    startDate: new Date(),
-    endDate: new Date(),
-    location: "",
-    participants: [],
-  });
+
+  //if the globalEvent is null, in the case of adding a new event,
+  //it'll take an empty object.
+  const [event, setEvent] = useState(
+    globalEvent.event || {
+      name: "",
+      description: "",
+      startDate: new Date(),
+      endDate: new Date(),
+      location: "",
+      participants: [],
+    }
+  );
   const [selectedParticipants, setSelectedParticipants] = useState([]);
   const handleSaveEvent = () => {
     if (
@@ -39,9 +45,11 @@ const EventFormScreen = () => {
       alert("You should fill everything!");
     } else {
       alert("Your event has been saved!");
-      addEvent(event);
+      // ADD the new event to the js file!
+      console.log("Event: ", event);
       //return the new event to Home Screen:
-      router.push({ pathname: "AdminHomeScreen", params: { event } });
+      globalEvents.setEvents((prevEvents) => [...prevEvents, event]);
+      router.back();
     }
   };
   const handleSelectParticipant = (participant) => {
@@ -68,41 +76,47 @@ const EventFormScreen = () => {
   const renderDateInput = (label, field) => (
     <View>
       <Text style={styles.label}>{label}:</Text>
-      <TouchableWithoutFeedback>
+      <TouchableOpacity
+        onPress={() => {
+          if (mode === "edit") showDatePicker(field);
+        }}
+      >
         <TextInput
           style={styles.input}
           value={event[field].toDateString()}
-          placeholder={event[field].toDateString()}
-          onPressIn={() => showDatePicker(field)}
-          pointerEvents="none"
+          editable={false} // Editable only in "edit" mode
         />
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
     </View>
   );
 
   return (
     <View style={styles.container}>
       <View style={styles.modalContent}>
-        <Text style={styles.modalTitle}>Add Event</Text>
+        <Text style={styles.modalTitle}>
+          {mode === "edit" ? "Event" : "View Event"}
+        </Text>
         <TextInput
           style={styles.input}
           placeholder="Event Name"
           value={event.name}
           onChangeText={(text) => setEvent({ ...event, name: text })}
+          editable={mode === "edit"} // Editable only in "edit" mode
         />
         <TextInput
           style={styles.input}
           placeholder="Description"
           value={event.description}
           onChangeText={(text) => setEvent({ ...event, description: text })}
+          editable={mode === "edit"} // Editable only in "edit" mode
         />
         <TextInput
           style={styles.input}
           placeholder="Location"
           value={event.location}
           onChangeText={(text) => setEvent({ ...event, location: text })}
+          editable={mode === "edit"} // Editable only in "edit" mode
         />
-
         {renderDateInput("Start Date", "startDate")}
         {renderDateInput("End Date", "endDate")}
         {datePickerConfig.visible && (
@@ -118,25 +132,47 @@ const EventFormScreen = () => {
             }
           />
         )}
-
-        <Text style={styles.label}>Add participants:</Text>
-        <FlatList
-          data={participants}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={[
-                styles.participantItem,
-                selectedParticipants.find((p) => p.id === item.id) &&
-                  styles.selectedItem,
-              ]}
-              onPress={() => handleSelectParticipant(item)}
-            >
-              <Text style={styles.participantText}>{item.name}</Text>
-            </TouchableOpacity>
-          )}
-        />
-        <Button title="Save Event" onPress={handleSaveEvent} />
+        {mode === "view" && (
+          <>
+            <Text style={styles.label}>Participants and their status:</Text>
+            <FlatList
+              // style={styles.eventsList}
+              data={event.participants}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <View style={styles.eventItem}>
+                  <Text>{item.name}</Text>
+                  <Text>{item.checked ? "✔" : "✖"}</Text>
+                </View>
+              )}
+            />
+          </>
+        )}
+        {mode === "edit" && (
+          <>
+          <Text style={styles.label}>Add participants:</Text>
+          <FlatList
+            data={participants}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={[
+                  styles.participantItem,
+                  selectedParticipants.find((p) => p.id === item.id) &&
+                    styles.selectedItem,
+                ]}
+                onPress={() => handleSelectParticipant(item)}
+                disabled={mode !== "edit"} // Disable participant selection in "view" mode
+              >
+                <Text style={styles.participantText}>{item.name}</Text>
+              </TouchableOpacity>
+            )}
+          />
+          </>
+        )}
+        {mode === "edit" && (
+          <Button title="Save Event" onPress={handleSaveEvent} />
+        )}
         <Button title="Cancel" onPress={() => router.back()} />
       </View>
     </View>

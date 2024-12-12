@@ -42,15 +42,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-
- participantItem: {
+  buttonsContainer: {
+    display: "flex",
+    flexDirection: "row",
+    gap: "4",
+  },
+  participantItem: {
     padding: 10,
     marginVertical: 5,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
     borderRadius: 5,
   },
   selectedItem: {
-    backgroundColor: '#add8e6',
+    backgroundColor: "#add8e6",
   },
   participantText: {
     fontSize: 16,
