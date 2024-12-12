@@ -37,7 +37,7 @@ DEBUG = os.environ["DEBUG"]
 # CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_AGE = 3600*24
 
-ALLOWED_HOSTS = ['testserver', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"].split(",")
 
 # Application definition
 
