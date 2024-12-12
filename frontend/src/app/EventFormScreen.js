@@ -46,6 +46,7 @@ const EventFormScreen = () => {
     } else {
       alert("Your event has been saved!");
       // ADD the new event to the js file!
+      //addEvent(event);
       console.log("Event: ", event);
       //return the new event to Home Screen:
       globalEvents.setEvents((prevEvents) => [...prevEvents, event]);
