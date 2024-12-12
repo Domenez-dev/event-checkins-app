@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import dotenv
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -89,27 +90,16 @@ WSGI_APPLICATION = "checkins_backend.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-"""
-    for testing purposes uncomment the sqlite3 database 
-    and comment the postgresql database block
-"""
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ["DATABASE_NAME"],
-        'USER': os.environ["DATABASE_USER"],
-        'PASSWORD': os.environ["DATABASE_PASS"],
-        'HOST': os.environ["DATABASE_HOST"],
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+# Comment this line when not in production
+DATABASES["default"]=dj_database_url.parse(os.environ["DATABASE_URL"])
+
 
 # REST_FRAMEWORK configuration
 REST_FRAMEWORK = {

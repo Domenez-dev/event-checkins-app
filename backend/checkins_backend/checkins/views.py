@@ -1,6 +1,6 @@
 import hmac
 import hashlib
-from datetime import datetime
+from datetime import datetime, date
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -55,7 +55,7 @@ class ScanQRCodeView(APIView):
             event=event
         )
 
-        if datetime.now() > event.end_date:
+        if date.today() > event.end_date:
             return Response(
                 {"error": "Event has already ended. Check-in is not allowed."},
                 status=status.HTTP_400_BAD_REQUEST
