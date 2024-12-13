@@ -3,7 +3,7 @@
   - Input fields for email and password.
   - Integration with the backend for authentication via API.
   - Show error messages for invalid credentials.
-  - Handle `JWT` token storage securely.
+  - Handle authorization token storage securely.
 
 - **Logout Functionality**:
   - Logout button that clears the token and navigates to the login screen.
