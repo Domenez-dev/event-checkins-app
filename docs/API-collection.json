@@ -1,0 +1,340 @@
+{
+	"info": {
+		"_postman_id": "bec23f1a-ab71-465d-88fc-d9db47b272f2",
+		"name": "checkins app localhost",
+		"description": "check [github docs]([https://github.com/Domenez-dev/event-checkins-app/blob/main/docs/API-Documentation.md](https://github.com/Domenez-dev/event-checkins-app/blob/main/docs/API-Documentation.md)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40313532",
+		"_collection_link": "https://gdg-team-dev-6.postman.co/workspace/gdg-Team-dev-6-Workspace~a55dec76-0988-44a4-80db-207f27d7b832/collection/40313532-bec23f1a-ab71-465d-88fc-d9db47b272f2?action=share&source=collection_link&creator=40313532"
+	},
+	"item": [
+		{
+			"name": "events",
+			"item": [
+				{
+					"name": "list events",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 44fe275d7d074e905ffd4e0bcec2be390aca0b39",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:8000/events/list/",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"events",
+								"list",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Token 4d1b2922c6ea47e3e725a360bcc3f030bc0fa2bf",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"gdg School\",\n    \"end_date\": \"2024-12-15\",\n    \"location\": \"ESI, Algiers\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://event-checkins-app.onrender.com/events/create/",
+							"protocol": "https",
+							"host": [
+								"event-checkins-app",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"events",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "event details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token 44fe275d7d074e905ffd4e0bcec2be390aca0b39",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "127.0.0.1:8000/events/details/?event_id=1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"events",
+								"details",
+								""
+							],
+							"query": [
+								{
+									"key": "event_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "event check-in/",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token c59178ccaa105a06eac7d187a959699ce47cf009",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"event_id\": 1,\n    \"participant_id\": 19\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/events/check-in/",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"events",
+								"check-in",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://event-checkins-app.onrender.com/authentication/login/",
+					"protocol": "https",
+					"host": [
+						"event-checkins-app",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"authentication",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token ea2149ecd46a49fc968ecb5f12b6fc666e005eb5",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "organizer1@gdg.dz",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "password123",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/authentication/logout/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"authentication",
+						"logout",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "qr scanner",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"event_id\": 1, \n    \"participant_id\": 20, \n    \"signature\": \"1c438fbf426c8cfb27c8659eacf576f8019d5ff7321ee578d0bc8728a74369de\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/qr-code-scan/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"qr-code-scan",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "participant creation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token bcafb306cbfc228dee866cf7051b8f1b55ffb6cd",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Bouzara\",\n    \"email\": \"bouzara.zakaria.25@gmail.com\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/participants/1/create/",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"participants",
+						"1",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
