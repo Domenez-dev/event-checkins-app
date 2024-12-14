@@ -1,6 +1,6 @@
 # Event Check-ins App
 
-![React Native](https://img.shields.io/badge/Frontend-React%20Native-blue?style=flat-square&logo=react) ![Django](https://img.shields.io/badge/Backend-Django-green?style=flat-square&logo=django) ![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue?style=flat-square&logo=postgresql) ![Status](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square)
+![React Native](https://img.shields.io/badge/Frontend-React%20Native-blue?style=flat-square&logo=react) ![Django](https://img.shields.io/badge/Backend-Django-green?style=flat-square&logo=django) ![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue?style=flat-square&logo=postgresql) ![Static Badge](https://img.shields.io/badge/Status-uncomplete-red?style=flat-square)
 
 ## 🚀 Overview
 
