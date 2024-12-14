@@ -6,6 +6,7 @@ export const EventFormComponent = ({
 }) => {
   // Participants state
   const [participants, setParticipants] = useState([]);
+  //We should fetch all participants!
   useEffect(() => {
     const fetchParticipants = () => {
       const data = getParticipants();
