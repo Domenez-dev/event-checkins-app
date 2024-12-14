@@ -45,6 +45,10 @@ The app was created for **educational purposes** as part of a **challenge from t
     - **Render** for deployment (both web service and database)
     - **OAuth2** for secure email integration
 
+--- 
+# Project Documentation
+check out the official [Docs](https://domenez-dev.gitbook.io/event-checkins-app) for our participants Check-ins app
+
 ## Setup Instructions
 
 ### Prerequisites
