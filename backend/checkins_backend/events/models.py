@@ -7,6 +7,7 @@ class Event(models.Model):
     end_date = models.DateField()
     location = models.CharField(max_length=255)
     organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="events")
+    description = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.name} ({self.end_date})"

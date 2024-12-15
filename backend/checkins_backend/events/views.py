@@ -31,6 +31,7 @@ class CreateEventView(APIView):
         name = request.data.get("name")
         end_date = request.data.get("end_date")
         location = request.data.get("location")
+        description = request.data.get("description")
 
         if not all([name, end_date, location]):
             return Response(
@@ -44,7 +45,8 @@ class CreateEventView(APIView):
                 name=name,
                 end_date=end_date,
                 location=location,
-                organizer=organizer
+                organizer=organizer,
+                description=description
             )
             return Response(
                 {"message": "Event created successfully!", "event_id": event.id},
@@ -65,7 +67,7 @@ class ListEventsView(APIView):
     permission_classes = [IsAuthenticated, IsAdmin]
 
     def get(self, request, *args, **kwargs):
-        events = Event.objects.all().values("id","name", "location", "end_date")
+        events = Event.objects.all().values("id","name", "location", "end_date", "description")
         return Response(
             {"events": list(events)},
             status=status.HTTP_200_OK
