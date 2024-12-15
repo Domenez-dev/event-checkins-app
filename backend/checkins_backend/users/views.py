@@ -37,7 +37,11 @@ class LoginView(APIView):
         if user:
             token, created = Token.objects.get_or_create(user=user)
             return Response(
-                {"message": "Logged in successfully!", "token": token.key,"is_admin": user.is_admin},
+                {
+                    "message": "Logged in successfully!",
+                    "token": token.key,
+                    "is_admin": user.is_admin
+                },
                 status=status.HTTP_200_OK
             )
            

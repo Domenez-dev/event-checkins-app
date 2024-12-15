@@ -5,7 +5,6 @@ import hashlib
 import json
 
 # import libraries for email sending functionality
-from django.core.mail import EmailMessage
 from django.conf import settings
 from io import BytesIO
 from .authenticate_gmail import GmailService
@@ -33,7 +32,7 @@ def generate_qrcode(event_id, participant_id):
     qr_image = qr.make_image(fill_color="black", back_color="white")  # Generate the QR code as an image
     return qr_image
 
-def send_qr_code_email(email, qr_image):
+def send_qr_code_email(email, qr_image, name):
     """
     Sends an email with the QR code attached to the participant.
     """

@@ -21,6 +21,6 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('authentication/', include('users.urls')),
     path('participants/', include('participants.urls')),
-    path('', include('checkins.urls')),
-    path('event/', include('events.urls')),
+    path('qr-code-scan/', include('checkins.urls')),
+    path('events/', include('events.urls')),
 ]

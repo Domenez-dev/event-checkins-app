@@ -1,6 +1,6 @@
 import hmac
 import hashlib
-from datetime import datetime
+from datetime import datetime, date
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -45,7 +45,7 @@ class ScanQRCodeView(APIView):
                 {"error": "Invalid signature."},
                 status=status.HTTP_403_FORBIDDEN
             )
-        
+
         # Fetch the participant record
         event = get_object_or_404(Event, id=event_id)
 
@@ -54,8 +54,8 @@ class ScanQRCodeView(APIView):
             id=participant_id,
             event=event
         )
-        
-        if datetime.now() > event_end_datetime:
+
+        if date.today() > event.end_date:
             return Response(
                 {"error": "Event has already ended. Check-in is not allowed."},
                 status=status.HTTP_400_BAD_REQUEST

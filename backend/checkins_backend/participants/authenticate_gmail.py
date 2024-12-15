@@ -32,7 +32,7 @@ class GmailService:
                 self.creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
-                self.creds = flow.run_local_server(port=8081)
+                self.creds = flow.run_local_server(port=8881)
 
             # Save the credentials for future use
             with open('token.json', 'w') as token:
