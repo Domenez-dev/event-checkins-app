@@ -79,13 +79,13 @@ Check out the [📚 Official Docs](https://domenez-dev.gitbook.io/event-checkins
 
 2. Install dependencies:
     ```bash
+    cd backend/checkins-backend
     pip install -r requirements.txt
     ```
 
-3. Create a `.env` file and add:
-    ```env
-    DATABASE_URL=your_database_url
-    SECRET_KEY=your_django_secret_key
+3. Copy the environment variables from the .env.example file
+    ```bash
+    mv ../backend/.env.example .env
     ```
 
 4. Apply migrations:
