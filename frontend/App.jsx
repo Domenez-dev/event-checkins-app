@@ -3,10 +3,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Signin from "./component/signin/auth";
-import Event from "./component/event/event";
-import CheckQr from "./component/checkqr/check";
-import { CheckProvider } from "../frontend/context/CheckProvider";
 
+
+import { CheckProvider } from "../frontend/context/CheckProvider";
+import EventAdmin from "./component/event-admin/index"
+import Event from "./component/checkqr/appp"
 import axios from "axios";
 axios.defaults.baseURL = "http://127.0.0.1:8000/";
 axios.defaults.withCredentials = true;
@@ -20,8 +21,8 @@ export default function App() {
       <CheckProvider>
         <TabNav.Navigator>
           <TabNav.Screen name={"HOME"} component={Signin} />
-          <TabNav.Screen name={"EVENT"} component={Event} />
-          <TabNav.Screen name={"CHECKQR"} component={CheckQr} />
+          <TabNav.Screen name={"EVENT-ADMIN"} component={EventAdmin} />
+          <TabNav.Screen name={"CHECKQR"} component={Event} />
         </TabNav.Navigator>
       </CheckProvider>
     </NavigationContainer>

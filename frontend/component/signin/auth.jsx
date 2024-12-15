@@ -23,73 +23,94 @@ export default function Signin() {
     e.preventDefault();
     const { email, password } = data;
     try {
-      const { data } = await axios.post("authentication/login/", {
-        email,
-        password,
-      });
-      //i add this
-      console.log(data.is_admin);
-      console.log(data.token);
-      const token = data.token;
-      async function savetoken() {
-        await AsyncStorage.setItem("auth_token", token);
-        await AsyncStorage.setItem("is_admin", JSON.stringify(data.is_admin));
-      }
-      savetoken();
-      //end
-      setdata({
-        email: "",
-        password: "",
-      });
-      navigation.navigate("EVENT");
+        const response = await fetch("https://event-checkins-app.onrender.com/authentication/login/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error);
+        }
+
+        const data = await response.json();
+
+        // Added code
+        console.log(data.is_admin);
+        console.log(data.token);
+        const token = data.token;
+
+        async function saveToken() {
+            await AsyncStorage.setItem("auth_token", token);
+            await AsyncStorage.setItem("is_admin", JSON.stringify(data.is_admin));
+        }
+
+        await saveToken();
+        // End of added code
+
+        setdata({
+            email: "",
+            password: "",
+        });
+
+        navigation.navigate("CHECKQR");
     } catch (error) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        alert(error.response.data.error);
-      }
-      console.log(error);
+        if (error.message) {
+            alert(error.message);
+        }
+        console.log(error);
     }
-  }
-  async function logoutUser(e) {
-    e.preventDefault();
-    try {
+}
+
+async function logoutUser(e) {
+  e.preventDefault();
+  try {
       const token = await AsyncStorage.getItem("auth_token");
       const is_admin = await AsyncStorage.getItem("is_admin");
       if (!token) {
-        alert("you are already logout");
-        return;
+          alert("you are already logout");
+          return;
       } else if (!is_admin) {
-        alert("you are an anonnyme ");
-        return;
+          alert("you are an anonnyme ");
+          return;
       }
       console.log(token);
-      console.log(is_admin)
+      console.log(is_admin);
+
       if (token) {
-        await axios.post(
-          "authentication/logout/",
-          {},
-          {
-            headers: { Authorization: `token ${token}` },
+          const response = await fetch("https://event-checkins-app.onrender.com/authentication/logout/", {
+              method: "POST",
+              headers: {
+                  "Authorization": `token ${token}`,
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify({}),
+          });
+
+          if (!response.ok) {
+              const errorData = await response.json();
+              throw new Error(errorData.detail);
           }
-        );
       }
+
       async function deleteToken() {
-        await AsyncStorage.removeItem("auth_token");
-        await AsyncStorage.removeItem("is_admin");
+          await AsyncStorage.removeItem("auth_token");
+          await AsyncStorage.removeItem("is_admin");
       }
-      deleteToken();
+
+      await deleteToken();
       alert("loged out success");
-      navigation.navigate("EVENT");
-    } catch (error) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        alert(error.response.data.detail);
+      navigation.navigate("HOME");
+  } catch (error) {
+      if (error.message) {
+          alert(error.message);
       }
       console.log(error);
-    }
   }
+}
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Image

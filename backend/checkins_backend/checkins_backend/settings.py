@@ -70,7 +70,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "checkins_backend.urls"
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8081',  # React Native app
+    'http://localhost:8082',
+      'http://192.168.1.41:8082'  # React Native app
 ]
 
 CORS_ALLOW_METHODS = [
