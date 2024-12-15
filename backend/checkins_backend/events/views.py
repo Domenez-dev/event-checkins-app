@@ -65,7 +65,7 @@ class ListEventsView(APIView):
     permission_classes = [IsAuthenticated, IsAdmin]
 
     def get(self, request, *args, **kwargs):
-        events = Event.objects.all().values("name", "location", "end_date")
+        events = Event.objects.all().values("id","name", "location", "end_date")
         return Response(
             {"events": list(events)},
             status=status.HTTP_200_OK
