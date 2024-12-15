@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { getParticipants } from "../app/appData";
 
-export const EventFormComponent = ({
-  setEvent,
-}) => {
+export const EventFormComponent = ({ setEvent }) => {
   // Participants state
   const [participants, setParticipants] = useState([]);
   //We should fetch all participants!
@@ -14,7 +12,7 @@ export const EventFormComponent = ({
     };
     fetchParticipants();
   }, []);
- 
+
   // Date picker state
   const [datePickerConfig, setDatePickerConfig] = useState({
     visible: false,

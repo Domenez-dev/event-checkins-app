@@ -6,8 +6,8 @@ export default function _layout() {
   return (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="AdminHomeScreen" options={{ headerShown: false }} />
-      <Stack.Screen name="EventFormScreen" options={{ headerShown: false }} />
+      <Stack.Screen name="Screens/AdminHomeScreen" options={{ headerShown: false }} />
+      <Stack.Screen name="Screens/EventFormScreen" options={{ headerShown: false }} />
     </Stack>
   );
 }

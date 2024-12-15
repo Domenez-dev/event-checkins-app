@@ -55,6 +55,7 @@ const participants = [
   { id: "16", name: "George Michaels", checked: false },
 ];
 
+
 export const addEvent = (event) => {
   events.push(event);
 };

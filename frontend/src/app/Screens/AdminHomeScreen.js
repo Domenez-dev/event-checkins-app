@@ -37,7 +37,7 @@ const AdminHomeScreen = () => {
   //       participants: details.participants || [],
   //     };
   //     router.push({
-  //       pathname: "EventFormScreen",
+  //       pathname: "Screens/EventFormScreen",
   //       params: { mode: "view" },
   //     });
   //   } catch (error) {
@@ -93,7 +93,7 @@ const AdminHomeScreen = () => {
                   //routing will be done in the viewEventDetails function.
                   globalEvent.event = item;
                   router.push({
-                    pathname: "EventFormScreen",
+                    pathname: "Screens/EventFormScreen",
                     params: { mode: "view" },
                   });
                 }}
@@ -109,7 +109,7 @@ const AdminHomeScreen = () => {
           // Pass event data and mode (edit):
           globalEvent.event = null;
           router.push({
-            pathname: "EventFormScreen",
+            pathname: "Screens/EventFormScreen",
             params: { mode: "edit" },
           });
         }}
