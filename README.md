@@ -146,11 +146,18 @@ Abdou2425
 beskie04
 fbben
 
-gdg Developers Integrating Program for 2024/2025 Team Dev 6:
+### gdg Developers Integrating Program for 2024/2025 Team Dev 6:
 
 |<img src="https://avatars.githubusercontent.com/domenez-dev" width="140">|<img src="https://avatars.githubusercontent.com/Abdou2425" width="140">|<img src="https://avatars.githubusercontent.com/beskie04" width="140">|<img src="https://avatars.githubusercontent.com/fbben" width="140">
 |:---------------------------------------------------:|:---------------------------------------------------:|:---------------------------------------------------:|:---------------------------------------------------:|
 | [**Bouzara Zakaria**](https://github.com/domenez-dev) | [**Abed Abderrahmane**](https://github.com/Abdou2425) | [**bachferrag bouchra**](https://github.com/beskie04) | [**Fares Benziada**](https://github.com/fbben) |
+
+### gdg mentors and co-managers:
+
+
+|<img src="https://avatars.githubusercontent.com/Ayyoub-Kasmi" width="140">|<img src="https://avatars.githubusercontent.com/FaresMezenner" width="140">|<img src="https://avatars.githubusercontent.com/Ninou01" width="140">|<img src="https://avatars.githubusercontent.com/zcybrgd" width="140">|<img src="https://avatars.githubusercontent.com/ar-ilyes" width="140">|<img src="https://avatars.githubusercontent.com/NaDdjg" width="140">|
+|:---------------------------------------------------:|:---------------------------------------------------:|:---------------------------------------------------:|:---------------------------------------------------:|:---------------------------------------------------:|:---------------------------------------------------:|
+| [**Ayyoub Kasmi**](https://github.com/Ayyoub-Kasmi) | [**Fares Mezenner**](https://github.com/FaresMezenner) | [**Derdouche Abdelghani**](https://github.com/Ninou01) | [**Zaïneb Boukhetala:**](https://github.com/zcybrgd) | [**ar-ilyes:**](https://github.com/ar-ilyes) | [**Nada Djedjig:**](https://github.com/NaDdjg) |
 
 ---
 
