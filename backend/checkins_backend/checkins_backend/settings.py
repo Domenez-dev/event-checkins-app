@@ -111,7 +111,7 @@ TEMPLATES = [
             ],
         },
     },
-]
+
 
 WSGI_APPLICATION = "checkins_backend.wsgi.application"
 
