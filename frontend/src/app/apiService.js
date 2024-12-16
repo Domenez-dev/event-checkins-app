@@ -40,7 +40,7 @@ export const createEvent = async (eventData, token) => {
 
 export const fetchEventDetails = async (eventId, token) => {
   const response = await fetch(
-    `https://event-checkins-app.onrender.com/events/details/?event_id=${eventId}/`,
+    `https://event-checkins-app.onrender.com/events/details/?event_id=${eventId}`,
     {
       method: "GET",
       headers: {

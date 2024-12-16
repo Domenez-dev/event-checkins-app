@@ -24,11 +24,12 @@ export const EventFormComponent = ({ setEvent }) => {
   };
 
   const handleDateChange = (event, selectedDate) => {
-    if (!selectedDate) {
+    date = selectedDate.toISOString().split('T')[0]; //from Date to string.
+    if (!date) {
       setDatePickerConfig({ visible: false, field: "" });
       return;
     }
-    setEvent((prev) => ({ ...prev, [datePickerConfig.field]: selectedDate }));
+    setEvent((prev) => ({ ...prev, [datePickerConfig.field]: date}));
     setDatePickerConfig({ visible: false, field: "" });
   };
 

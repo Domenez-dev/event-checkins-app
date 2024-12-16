@@ -13,7 +13,6 @@ import styles from "../styles";
 import { router, useLocalSearchParams } from "expo-router";
 //import the logic of EventForm:
 import { EventFormComponent } from "../../components/EventFormComponent";
-import { addEvent } from "../appData";
 import { globalEvent, globalEvents } from "../globalVar";
 import { createEvent } from "../apiService";
 
@@ -29,55 +28,39 @@ const EventFormScreen = () => {
     globalEvent.event || {
       name: "",
       description: "",
-      startDate: new Date(),
-      endDate: new Date(),
+      // startDate: new Date(),
+      end_date: "",
       location: "",
       participants: [],
     }
   );
   const [selectedParticipants, setSelectedParticipants] = useState([]);
   //CREAT EVENT END POINT:
-  // const handleSaveEvent = async () => {
-  //   if (!event.name || !event.location) {
-  //     alert("You should fill in all required fields!");
-  //     return;
-  //   }
-  //   try {
-  //     const token = "auth-token";
-  //     const newEvent = await createEvent(
-  //       {
-  //         name: event.name,
-  //         date: event.startDate.toISOString().split("T")[0], // Convert date to 'YYYY-MM-DD'
-  //         location: event.location,
-  //       },
-  //       token
-  //     );
-  //     globalEvents.setEvents((prevEvents) => [...prevEvents, newEvent]);
-  //     alert("Your event has been created successfully!");
-  //     router.back();
-  //   } catch (error) {
-  //     console.error("Error creating event:", error.message);
-  //     alert("Failed to create event.");
-  //   }
-  // };
-  const handleSaveEvent = () => {
-    if (
-      !event.name ||
-      !event.description ||
-      !event.location ||
-      selectedParticipants.length === 0
-    ) {
-      alert("You should fill everything!");
-    } else {
-      alert("Your event has been saved!");
-      // ADD the new event to the js file!
-      //addEvent(event);
-      console.log("Event: ", event);
-      //return the new event to Home Screen:
-      globalEvents.setEvents((prevEvents) => [...prevEvents, event]);
+  const handleSaveEvent = async () => {
+    if (!event.name || !event.location || !event.end_date) {
+      alert("You should fill in all required fields!");
+      return;
+    }
+    try {
+      const token = "711cc97d3850153c6cf1dfebc9f05286a076d6ce";
+      const newEvent = await createEvent(
+        {
+          name: event.name,
+          end_date: event.end_date,
+          location: event.location,
+        },
+        token
+      );
+      //there is a problem in updating this global var (TO FIX!).
+      // globalEvents.setEvents((prevEvents) => [...prevEvents, newEvent]);
+      alert("Your event has been created successfully!");
       router.back();
+    } catch (error) {
+      console.error("Error creating event:", error.message);
+      alert("Failed to create event.");
     }
   };
+
   const handleSelectParticipant = (participant) => {
     if (selectedParticipants.find((p) => p.id === participant.id)) {
       setSelectedParticipants((prev) =>
@@ -109,7 +92,7 @@ const EventFormScreen = () => {
       >
         <TextInput
           style={styles.input}
-          value={event[field].toDateString()}
+          value={event[field]}
           editable={false} // Editable only in "edit" mode
         />
       </TouchableOpacity>
@@ -143,19 +126,19 @@ const EventFormScreen = () => {
           onChangeText={(text) => setEvent({ ...event, location: text })}
           editable={mode === "edit"} // Editable only in "edit" mode
         />
-        {renderDateInput("Start Date", "startDate")}
-        {renderDateInput("End Date", "endDate")}
+        {/* {renderDateInput("Start Date", "startDate")} */}
+        {renderDateInput("End Date", "end_date")}
         {datePickerConfig.visible && (
           <DateTimePicker
-            value={event[datePickerConfig.field]}
+            value={new Date()}
             mode="date"
             display="default"
             onChange={handleDateChange}
-            minimumDate={
-              datePickerConfig.field === "endDate"
-                ? event.startDate
-                : new Date()
-            }
+            // minimumDate={
+            //   datePickerConfig.field === "end_date"
+            //     ? event.start_date
+            //     : new Date()
+            // }
           />
         )}
         {mode === "view" && (
@@ -168,7 +151,7 @@ const EventFormScreen = () => {
               renderItem={({ item }) => (
                 <View style={styles.eventItem}>
                   <Text>{item.name}</Text>
-                  <Text>{item.checked ? "✔" : "✖"}</Text>
+                  <Text>{item.check_in_time == null ? "✖" : "✔"}</Text>
                 </View>
               )}
             />

@@ -1,14 +1,15 @@
 export const globalEvents = {
   events: [],
-    setEvents: null,
+  setEvents: null,
 };
 export const globalEvent = {
   event: {
+    id:"",
     name: "",
     description: "",
-    startDate: new Date(),
-    endDate: new Date(),
     location: "",
-    participants: [], 
+    // startDate: "new Date()",
+    end_date: "",
+    participants: [],
   },
 };
