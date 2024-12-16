@@ -1,4 +1,3 @@
-
 # API Documentation
 
 This document describes the APIs and endpoints for the event check-ins app, making it easier for the frontend to integrate with the backend.
