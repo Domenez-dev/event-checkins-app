@@ -16,11 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from . import views
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('authentication/', include('users.urls')),
     path('participants/', include('participants.urls')),
     path('qr-code-scan/', include('checkins.urls')),
     path('events/', include('events.urls')),
+    path('', views.api_index, name='api_index'),  # Maps to /api-index/
 ]
